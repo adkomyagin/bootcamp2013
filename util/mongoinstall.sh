@@ -6,10 +6,6 @@
 # the location of where the mongo tgz was extracted
 target=$1
 
-if [ -z $target ]; then
-    echo "usage: $0 <target directory>"
-fi
-
 if [ ! -f "/usr/bin/mongo" ]; then
     echo "run standard install first:"
     echo
@@ -25,7 +21,14 @@ gpgcheck=0" | sudo tee -a /etc/yum.repos.d/10gen.repo'
     echo 'yum -y install mongo-10gen-server'
     echo 'yum -y install sysstat'
 
+    echo
+    echo "usage: $0 <target directory>"
+
     exit 1
+fi
+
+if [ -z $target ]; then
+    echo "usage: $0 <target directory>"
 fi
 
 if [ ! -d "$target" ]; then
