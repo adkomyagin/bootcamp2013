@@ -1,4 +1,3 @@
-// same as hourloader.js but uses a "right-balanced index"
 
 var now = new Date();
 

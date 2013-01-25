@@ -19,40 +19,24 @@ gnuplot << EOF
 # lw chooses a line width 1=normal, can use 0.8, 0.3, 1.5, 3, etc.
 # ls chooses a line style
 
-set terminal png
+set terminal png large
 
 file = "$1"
 output = "$2"
 
-set output "tmp.png"
+set grid
+set output output
 
-plot file u 1
-min_y = GPVAL_DATA_Y_MIN
-max_y = GPVAL_DATA_Y_MAX
-max_x = GPVAL_DATA_X_MAX
-
-f(x) = mean_y
-fit f(x) file u 0:1 via mean_y
-
-stddev_y = sqrt(FIT_WSSR / (FIT_NDF + 1 ))
-
-unset label
-set label 1 gprintf("Minimum = %g", min_y) at 5, max_y
-set label 2 gprintf("Maximum = %g", max_y) at max_x * .25, max_y
-set label 3 gprintf("Mean = %g", mean_y) at max_x * .5, max_y
-set label 4 gprintf("Std dev = %g", stddev_y) at max_x * .5, max_y - 400
-
-print("Minimum = %g", min_y)
-print("Maximum = %g", max_y)
-print("Mean = %g", mean_y)
-print("Std dev = %g", stddev_y)
+set ylabel "queries per sec"
+set y2label "faults per sec"
+set title "queries and page faults"
 
 set y2tics border
 
-set output output
+set key on tmargin
 
-plot 15 axes x1y2 with filledcurves y1=0 lt 1 lc rgb "green" lw 3, \
-file using 1 with points pt 7 lt 1 ps 1, \
-file using 8 axes x1y2 with lines linecolor rgb "blue" linetype 7 lw 2.5
+plot \
+file using 6 title "queries per sec" with points pt 7 lt 1 ps 1, \
+file using 11 axes x1y2 title "page faults per sec" with lines linecolor rgb "blue" linetype 7 lw 2.5
 
 EOF

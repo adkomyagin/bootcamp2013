@@ -19,35 +19,24 @@ gnuplot << EOF
 # lw chooses a line width 1=normal, can use 0.8, 0.3, 1.5, 3, etc.
 # ls chooses a line style
 
-set terminal png
+set terminal png large
 
 file = "$1"
 output = "$2"
 
-set output "tmp.png"
-
-plot file u 1
-min_y = GPVAL_DATA_Y_MIN
-max_y = GPVAL_DATA_Y_MAX
-max_x = GPVAL_DATA_X_MAX
-
-f(x) = mean_y
-fit f(x) file u 0:1 via mean_y
-
-stddev_y = sqrt(FIT_WSSR / (FIT_NDF + 1 ))
-
-set label 1 gprintf("Minimum = %g", min_y) at 5, max_y
-set label 2 gprintf("Maximum = %g", max_y) at max_x * .25, max_y
-set label 3 gprintf("Mean = %g", mean_y) at max_x * .5, max_y
-set label 4 gprintf("Std dev = %g", stddev_y) at max_x * .75, max_y
-
-print("Minimum = %g", min_y)
-print("Maximum = %g", max_y)
-print("Mean = %g", mean_y)
-print("Std dev = %g", stddev_y)
-
+set grid
+set nokey
 set output output
 
-plot file u 1 w p pt 7 lt 1 ps 1
+set xtics 0,1
+set xlabel "connections"
+set ylabel "commands per sec"
+set title "commands vs. connections"
+
+set key on tmargin
+
+plot \
+file using 18:6 with points pt 7 lt 1 ps 1
+
 
 EOF
