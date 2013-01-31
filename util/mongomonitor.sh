@@ -35,8 +35,8 @@ echo $mongoline $cpuline $deviceline | sed -e 's/\\s*/ /g' -e 's/ /\t/g'
 while true; do
     # pull a line from mongostat and iostat
     mongoline=`tail -1 /tmp/mongostat.log|sed -e 's/*//g'`
-    cpuline=`tail -50 iostat.log | grep -A1 avg-cpu|tail -1`
-    deviceline=`tail -50 iostat.log | grep $device | tail -1`
+    cpuline=`tail -50 /tmp/iostat.log | grep -A1 avg-cpu|tail -1`
+    deviceline=`tail -50 /tmp/iostat.log | grep $device | tail -1`
 
     echo $mongoline $cpuline $deviceline | sed -e 's/ /\t/g'
     sleep 1

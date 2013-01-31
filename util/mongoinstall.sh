@@ -9,9 +9,6 @@ target=$1
 if [ ! -f "/usr/bin/mongo" ]; then
     echo "run standard install first:"
     echo
-    echo 'wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.3.2.tgz'
-    echo 'tar zxvf mongodb-linux-x86_64-2.3.2.tgz'
-    echo
     echo 'echo "[10gen]
 name=10gen Repository
 baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64
@@ -21,14 +18,20 @@ gpgcheck=0" | sudo tee -a /etc/yum.repos.d/10gen.repo'
     echo 'yum -y install mongo-10gen-server'
     echo 'yum -y install sysstat'
 
+    echo 'and then download the latest build:'
+    echo 'wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.3.2.tgz'
+    echo 'sudo tar zxvf mongodb-linux-x86_64-2.3.2.tgz -C /urs/lib'
     echo
-    echo "usage: $0 <target directory>"
+    echo
+    echo 'usage: $0 <target directory>'
+    echo '  target directory - /usr/lib for example'
 
     exit 1
 fi
 
 if [ -z $target ]; then
-    echo "usage: $0 <target directory>"
+    echo 'usage: $0 <target directory>'
+    echo '  target directory - /usr/lib for example'
 fi
 
 if [ ! -d "$target" ]; then
