@@ -63,4 +63,15 @@ ln -v -s $target/bin/mongosniff mongosniff
 ln -v -s $target/bin/mongostat mongostat
 ln -v -s $target/bin/mongotop mongotop
 
+echo
+echo "setting limits..."
+echo '
+ulimit -f unlimited
+ulimit -t unlimited
+ulimit -v unlimited
+ulimit -n 64000
+ulimit -m unlimited
+ulimit -u 32000
+' | tee -a /etc/profile.d/custom.sh
+
 echo "done"
