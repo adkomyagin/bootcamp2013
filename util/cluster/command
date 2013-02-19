@@ -1,0 +1,64 @@
+
+#!/bin/bash
+
+DIR=$( cd "$( dirname "$0" )" && pwd )
+
+# use the -n argument to not echo a newline after the hostname
+
+newline="true"
+background="false"
+user=$USER
+
+while true; do
+    if [ "$1" = "-n" ]; then
+	newline="false"
+	shift 1
+    elif [ "$1" = "-b" ]; then
+	background="true"
+	shift 1
+    elif [ "$1" = "-u" ]; then
+	user=$2
+	shift 2
+    else
+	break
+    fi
+done
+
+if [ $# -lt 2 ]; then
+    echo "usage: $0 [-n] [-b] [-u <user>] <group> <command>"
+    echo "Run a command or named command on each host in a named group"
+    echo
+    echo "Arguments"
+    echo -e "\t-n\tDo not echo a newline char after the hostname."
+    echo -e "\t\tThis is usefull if all the output fits on a single line."
+    echo -e "\tgroup\tThe name of the group to run the command against."
+    echo -e "\t\t  must be a file with the same name containing a list of hosts in $DIR/groups"
+    echo -e "\tcommand\tThe command to run. If there is a file with the given name in the $DIR/commands"
+    echo -e "\t\tdirectory, the contents of that file will be run on each host.  Otherwise, the"
+    echo -e "\t\tgiven command itself will be run on each host. IE, "mycommand" or "ls -al", "date", "reboot", etc"
+    exit 1
+fi
+
+group=$1
+shift 1
+
+command=$1
+
+if [ -f "$DIR/commands/$command" ]; then
+    command=`cat "$DIR/commands/$command"`
+else
+    command="$@"
+fi
+
+for host in `cat "$DIR/groups/${group}"`; do
+    echo -n "${host}:"
+    if [ "$newline" = "true" ]; then
+	echo
+    fi
+
+    if [ "$background" = "true" ]; then
+	ssh -qf $user@$host $command
+    else
+	ssh -qt $user@$host $command
+    fi
+done

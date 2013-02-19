@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DIR=$( cd "$( dirname "$0" )" && pwd )
+
+if [ $# -lt 3 ]; then
+    echo "usage: $0 [-n] <group> <src> <dest>"
+    exit 1
+fi
+
+if [ "$1" = "-u" ]; then
+    user=$2
+    shift 2
+else
+    user=$USER
+fi
+
+group=$1
+src=$2
+dest=$3
+
+for host in `cat "$DIR/groups/${group}"`; do
+    echo -n "${host}:"
+    scp $src $user@$host:$dest
+done

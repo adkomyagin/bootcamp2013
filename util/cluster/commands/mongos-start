@@ -1,0 +1,1 @@
+mongos --fork --configdb client-a --logpath /tmp/mongos.log

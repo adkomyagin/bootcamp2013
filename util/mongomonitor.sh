@@ -7,10 +7,17 @@
 
 # may want to add code to capture the mongod log for the duration as well
 
+if [ "$1" = "--port" ]; then
+    port=$2
+    shift 2
+else
+    port=27017
+fi
+
 # device to monitor
 device=$1
 
-mongostat > /tmp/mongostat.log &
+mongostat --port $port > /tmp/mongostat.log &
 mongostat_pid=$!
 
 iostat -xk 1 > /tmp/iostat.log &
@@ -18,7 +25,6 @@ iostat_pid=$!
 
 trap "{ kill $mongostat_pid; kill $iostat_pid; }" EXIT
 
-echo "test=$testname" 1>&2
 echo "device=$device" 1>&2
 echo "mongostat pid=$mongostat_pid" 1>&2
 echo "iostat pid=$iostat_pid" 1>&2
@@ -28,8 +34,8 @@ sleep 5
 # build the header
 
 mongoline=`tail -50 /tmp/mongostat.log|grep insert|tail -1|sed -e 's/idx miss %/%idx-miss/' -e 's/locked db/locked-db/'`
-cpuline=`tail -50 iostat.log | grep avg-cpu|tail -1|sed -e 's/avg-cpu://'`
-deviceline=`tail -50 iostat.log | grep Device: | tail -1`
+cpuline=`tail -50 /tmp/iostat.log | grep avg-cpu|tail -1|sed -e 's/avg-cpu://'`
+deviceline=`tail -50 /tmp/iostat.log | grep Device: | tail -1`
 echo $mongoline $cpuline $deviceline | sed -e 's/\\s*/ /g' -e 's/ /\t/g'
 
 while true; do
