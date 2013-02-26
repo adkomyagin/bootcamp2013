@@ -1,0 +1,5 @@
+"Shards"	"Requests per Second"
+1	70000
+2	128000
+4	230000
+8	360000
