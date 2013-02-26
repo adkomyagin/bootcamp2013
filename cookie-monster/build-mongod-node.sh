@@ -58,6 +58,9 @@ if [ "${DATA}" = "true" ]; then
     for vol in $(awk '{print $2}' vols.txt); do
 	i=$((i+1))
 	ec2-attach-volume $vol -i ${INSTANCE_ID} -d /dev/sdh${i}
+
+	# set the volumes to delete on termination
+	ec2-modify-instance-attribute ${INSTANCE_ID} --block-device-mapping /dev/sdh${i}=${vol}:true
     done
 
     echo "waiting for devices..."
@@ -109,6 +112,9 @@ if [ "${JOURNAL}" = "true" ]; then
     vol=$(awk '{print $2}' journal-vols.txt)
     ec2-attach-volume $vol -i ${INSTANCE_ID} -d /dev/sdi
 
+    # set the volumes to delete on termination
+    ec2-modify-instance-attribute ${INSTANCE_ID} --block-device-mapping /dev/sdi=${vol}:true
+
     echo "waiting for devices..."
     while true; do 
 	c=`ls -dl /dev/sdi*|wc -l`
@@ -141,7 +147,18 @@ fi
 # update /etc/mongod.conf
 sudo sed -i -e 's/logpath\=.*/logpath\=\/log\/mongod.log/' -e 's/dbpath\=.*/dbpath\=\/data/' /etc/mongod.conf
 
+echo "setting limits..."
+echo '
+ulimit -f unlimited
+ulimit -t unlimited
+ulimit -v unlimited
+ulimit -n 64000
+ulimit -m unlimited
+ulimit -u 32000
+' | tee -a /etc/profile.d/custom.sh
 
+echo "setting readahead..."
+echo -e "\nblockdev --setra 32 /dev/mapper/vg0-data" >> /etc/rc.local
 
-
-
+echo "done"
+echo "run /etc/init.d/mongod start to start mongod"
