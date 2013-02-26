@@ -29,9 +29,9 @@ set nokey
 set output output
 
 set xtics 0,1
-set xlabel "connections"
-set ylabel "commands per sec"
-set title "commands vs. connections"
+set xlabel "threads"
+set ylabel "requests per sec"
+set title "requests/sec vs. threads"
 
 set key on tmargin
 
