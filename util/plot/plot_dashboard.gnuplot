@@ -79,7 +79,7 @@ set title ""
 # %user (20)	%nice	%system	%iowait	%steal	%idle $diskutil (37)
 
 # may have to shift these if mongostat is run against a replicaset or mongos
-shift=2
+shift=0
 
 plot \
 file using 20+shift axes x1y1 title "%user" with lines linecolor rgb "blue" linetype 7 lw 1, \
