@@ -10,5 +10,5 @@ a single line and writes it to std out.  Redirect std out to a file to save the 
 
 mongomonitor.sh [--port arg] <device name>
 
---port arg&nbsp;&nbsp;specifies the port to connect to
+--port arg&nbsp;&nbsp;specifies the port to connect to  
 device name&nbsp;&nbsp;specifies the device to collect iostat metrics on
