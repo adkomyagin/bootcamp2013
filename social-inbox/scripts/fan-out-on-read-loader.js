@@ -25,7 +25,7 @@ for (var i = 0; i < 10000000; i++) {
 	
 	var msg = {
 		    from: getRandomUsername(),
-		    to: unique(names),
+		    to: names,
 			sent: new Date(), 	
 			message: "Hi " + getRandomUsername() + "!"
 	};
