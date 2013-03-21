@@ -51,6 +51,7 @@ var names = ["aaaaho", "aaaald", "aaaao", "aaaaxen", "aaaaxvx", "aaabajwpg", "aa
 
 for (var i=0; i < names.length - 1; i++) {
 	var name = names[i];
-	db.messages.find({ to: name }).sort({ sent: -1 }).limit(10);
+	var result = db.messages.find({ to: name }).sort({ sent: -1 }).limit(10).toArray();
+	print(result);
 }
 
