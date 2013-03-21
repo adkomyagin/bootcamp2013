@@ -16,7 +16,7 @@ var names = ["aaaaho", "aaaald", "aaaao", "aaaaxen", "aaaaxvx", "aaabajwpg", "aa
 "aabpkhyr", "aabpqdl", "aabprfvah", "aabpvj", "aabqci", "aabqupvv", "aabrclbab", "aabreiuv", "aabrfz", "aabrg", "aabrgie", "aabrgurene", "aabrnfrgab", "aabsant", "aabseywwfrvb", 
 "aabsgmht", "aabshkn", "aabshkwjm", "aabsllh", "aabsnd", "aabssecovj", "aabsvsoblq", "aabsvwf", "aabtleppjjdn", "aabtonhac", "aabtpbua", "aabtuqr", "aabtzbg", "aabtzof", "aabtzrnj", 
 "aabuazogtu", "aabubqcd", "aabumgujo", "aabumkddp", "aabupyzf", "aabusa", "aabusxy", "aabuwsr", "aabvea", "aabvgcrr", "aabvldepp", "aabvruxp", "aabvzhuii", "aabvztg", "aabvzvvgy", 
-"aabwf", "aabwhlbbcr", "aabwkmh", "aabwqzwfc", "aabwvvt", "aabwzvhe", "aabxdm", "aabyhb", "aabylof", "aabzcfw", "aabzf", "aabzgmrk", "aabziu", "aabzras", "aabzywl", "aacaeiwdt", 
+"aabwf", "aabwhlbbcr", "aabwkmh", "aabwqzwfc", "aabwvvt", "aabwzvhe", "aabxdm", "aabyhb", "aabylof", "aabzcfw", "aabzf", "aabzgmrk", "aabziu", "aabzras", "aabzywl", "aacaeiwdt",
 "aacaknrvf", "aacba", "aacbclqku", "aacbhsif", "aacbmlpwof", "aacbokmz", "aacbsgon", "aacbvs", "aaccbe", "aaccdb", "aaccddfui", "aaccfyrve", "aaccgft", "aaccqcaiy", "aaccql", "aaccuq", 
 "aaccze", "aacdessc", "aacdevo", "aacdmx", "aacdpn", "aacdtyof", "aacdwa", "aacealuwupt", "aaceok", "aaceqkiks", "aacerwqf", "aacev", "aacew", "aacewogi", "aacexaa", "aaceyoavq", "aacezv", 
 "aacfjlis", "aacftbn", "aacgar", "aacgdapxf", "aacghww", "aacgqd", "aacgz", "aachpft", "aachpxtbl", "aaciax", "aacickgrtw", "aacie", "aaciev", "aacihgli", "aacihqu", "aacika", "aacimpmjir", 
@@ -51,6 +51,6 @@ var names = ["aaaaho", "aaaald", "aaaao", "aaaaxen", "aaaaxvx", "aaabajwpg", "aa
 
 for (var i=0; i < names.length - 1; i++) {
 	var name = names[i];
-	db.messages.find({ to: name }).sort({ sent: -1 }).limit(10)	
+	db.messages.find({ to: name }).sort({ sent: -1 }).limit(10);
 }
 
