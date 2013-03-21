@@ -13,7 +13,6 @@ function getRandomUsername() {
     return text;
 };
 
-db.messages.drop();
 db.messages.ensureIndex({to:1, sent:-1});
 
 
@@ -27,7 +26,7 @@ for (var i = 0; i < 10000000; i++) {
 		    from: getRandomUsername(),
 		    to: unique(names),
 			sent: new Date(), 	
-			message: "Hi " + getRandomUsername() + "!"
+			message: "Hi " + getRandomUsername() + " " + getRandomUsername() + " " + getRandomUsername() + "!"
 	};
 	db.messages.insert(msg);
 }
