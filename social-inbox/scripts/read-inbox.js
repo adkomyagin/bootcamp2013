@@ -1,28 +1,4 @@
 
-function getRandomInt (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-function getRandomUsername() {
-    var text = "";
-    var possible = "abcdefghijklmnopqrstuvwxyz";
-
-    for( var i=0; i < getRandomInt(5,13); i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-};
-
-var possible = "abcdefghijklmnopqrstuvwxyz";
-var names = [];
-for (var i=0; i < possible.length - 1; i++) {
-	var letter = possible[i];
-	var sample = db.messages.find({to:"/^" + letter}}).limit(100);
-	names.push(sample);
-}
-print(names);
-
-
 var names = ["aaaaho", "aaaald", "aaaao", "aaaaxen", "aaaaxvx", "aaabajwpg", "aaabc", "aaabcpmo", "aaabfjfu", "aaabg", "aaabrpohbl", "aaabxj", "aaacivtjp", "aaacnlrdadi", "aaacpjxu", "aaacrv",
 "aaactbtr", "aaadby", "aaaddthb", "aaadu", "aaaejj", "aaafgfifr", "aaafoo", "aaaftge", "aaagpbt", "aaahmqmu", "aaahqvah", "aaahs", "aaahszfd", "aaaht", "aaahwip", "aaahywss", 
 "aaaiilrgu", "aaainfbm", "aaaitdmrd", "aaaiyrxn", "aaajchlu", "aaajqdjw", "aaajqwka", "aaajxc", "aaakodz", "aaakp", "aaakwdfi", "aaalixh", "aaalndjvca", "aaalpm", "aaalx", "aaamc", 
@@ -71,7 +47,7 @@ var names = ["aaaaho", "aaaald", "aaaao", "aaaaxen", "aaaaxvx", "aaabajwpg", "aa
 "aaexhais", "aaexl", "aaexpu", "aaexusg", "aaeycsv", "aaeygl", "aaeyo", "aaeypjtcjz", "aaeyqk", "aaeyqqcn", "aaeyuhikz", "aaezaf", "aaezcvlu", "aaezjc", "aaezltl", "aaezo", "aaezpvrnoc", 
 "aaezxpferp", "aafacygz", "aafadj", "aafadnkd", "aafapnm", "aafasa", "aafauhnq", "aafaulg", "aafbb", "aafbhfj", "aafbkgh", "aafbkojp", "aafbqsbs", "aafbrqxqr", "aafbvu", "aafcnjdw", "aafcpvhn", 
 "aafcrhehlwhm", "aafcspkz", "aafczbhzb", "aafdd", "aafdrt", "aafegmcqknz", "aafejvlyv", "aafetk", "aafeyqpg", "aafffy", "aaffgnrs", "aaffgozmfr", "aaffotx", "aaffovjm", "aaffsbx", "aaffyb", 
-"aafgjcfep", "aafgm", "aafgn", "aafgoot", "aafgrgt", "aafgsfr", "aafhacxs", "aafhdtrvo", "aafhkgbs", "aafhkozx", "aafhs"]
+"aafgjcfep", "aafgm", "aafgn", "aafgoot", "aafgrgt", "aafgsfr", "aafhacxs", "aafhdtrvo", "aafhkgbs", "aafhkozx", "aafhs"];
 
 for (var i=0; i < names.length - 1; i++) {
 	var name = names[i];
