@@ -49,9 +49,10 @@ var names = ["aaaaho", "aaaald", "aaaao", "aaaaxen", "aaaaxvx", "aaabajwpg", "aa
 "aafcrhehlwhm", "aafcspkz", "aafczbhzb", "aafdd", "aafdrt", "aafegmcqknz", "aafejvlyv", "aafetk", "aafeyqpg", "aafffy", "aaffgnrs", "aaffgozmfr", "aaffotx", "aaffovjm", "aaffsbx", "aaffyb", 
 "aafgjcfep", "aafgm", "aafgn", "aafgoot", "aafgrgt", "aafgsfr", "aafhacxs", "aafhdtrvo", "aafhkgbs", "aafhkozx", "aafhs"];
 
-for (var i=0; i < names.length - 1; i++) {
-	var name = names[i];
-	var result = db.messages.find({ to: name }).sort({ sent: -1 }).limit(10).toArray();
-	print(result);
+for (;;) {
+	for (var i=0; i < names.length - 1; i++) {
+		var name = names[i];
+		var result = db.messages.find({ to: name }).sort({ sent: -1 }).limit(10).toArray();
+	}
 }
 
