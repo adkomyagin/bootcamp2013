@@ -157,7 +157,10 @@ ulimit -m unlimited
 ulimit -u 32000
 ' | tee -a /etc/profile.d/custom.sh
 
-echo "setting readahead..."
+echo "setting readahead"
+blockdev --setra 32 /dev/mapper/vg0-data
+
+echo "setting readahead in rc.local"
 echo -e "\nblockdev --setra 32 /dev/mapper/vg0-data" >> /etc/rc.local
 
 echo "done"
