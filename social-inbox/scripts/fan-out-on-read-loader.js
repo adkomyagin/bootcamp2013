@@ -77,7 +77,6 @@ function getRandomUsernames(max) {
 
 db.messages.ensureIndex({to:1, sent:-1});
 
-
 for (var i = 0; i < 10000000; i++) {
 	
 	
