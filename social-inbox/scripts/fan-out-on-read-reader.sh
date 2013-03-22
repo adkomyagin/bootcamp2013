@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mongo messages fan-out-on-read-loader.js
+mongo messages fan-out-on-read-reader.js
