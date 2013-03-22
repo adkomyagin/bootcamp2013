@@ -78,11 +78,9 @@ function getRandomUsernames(max) {
 db.messages.ensureIndex({to:1, sent:-1});
 
 for (var i = 0; i < 10000000; i++) {
-	
-	
 	var msg = {
 		    from: getRandomUsername(),
-		    to: names,
+		    to: getRandomUsernames(),
 			sent: new Date(), 	
 			message: "Hi " + getRandomUsername() + " " + getRandomUsername() + " " + getRandomUsername() + "!"
 	};
