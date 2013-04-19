@@ -19,7 +19,7 @@ gnuplot << EOF
 # lw chooses a line width 1=normal, can use 0.8, 0.3, 1.5, 3, etc.
 # ls chooses a line style
 
-set terminal png large
+set terminal png large size 800,600
 
 file = "$1"
 output = "$2"
@@ -27,9 +27,10 @@ output = "$2"
 set grid
 set output output
 
-set ylabel "operations per sec"
-set y2label "GB of RAM"
-set title "queries and page faults"
+set ylabel "ops per sec"
+set y2label "disk %util"
+set xlabel "working set size (MB)"
+set title "Read-only load against increasing working set size (4 cores, 16 GB RAM)"
 
 set y2tics border
 
@@ -38,10 +39,16 @@ set key on tmargin
 
 
 plot \
-file using 6 axes x1y1 title "queries per sec" with points pt 7 lt 1 ps 1, \
-file using 11 axes x1y1 title "page faults per sec" with lines linecolor rgb "blue" lt 7 lw 2.5, \
-7500 axes x1y1 title "cpu limit" with lines linecolor rgb "orange" lt 1 lw 2.5, \
-800 axes x1y1 title "disk limit" with lines linecolor rgb "green" lt 1 lw 2.5, \
-15 axes x1y2 title "Available RAM" with lines linecolor rgb "green" lt 1 lw 2.5
+file using 38:6 axes x1y1 title "queries per sec" with points pt 7 lt 6 ps 1, \
+file using 38:37 axes x1y2 title "disk %util" with lines lt 19 lw 2.5, \
+file using 38:11 axes x1y1 title "page faults per sec" with lines lt 8 lw 2.5
+
+
+#, \
+#7500 axes x1y1 title "cpu limit" with lines linecolor rgb "black" lt 0 lw 2.5, \
+#800 axes x1y1 title "disk limit" with lines linecolor rgb "black" lt 2 lw 2.5
+
+#, \
+#15 axes x1y2 title "Available RAM" with lines linecolor rgb "green" lt 1 lw 2.5
 
 EOF
