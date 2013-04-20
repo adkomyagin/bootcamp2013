@@ -40,7 +40,7 @@ arrive, you store each one as a document in the database.
    { load: 92, server: 'server1', timestamp: ISODate("...") } 
 
 As samples arrive, you just insert them into the database. When a query arrives
-we'll run an aggregation query over the data to return the results. 
+we'll fetch all of the documents in that time range and return them. 
 
 *Document per hour* 
 
@@ -53,9 +53,6 @@ increment them when new samples arrive:
 When samples arrive, you do an update on this document to increment the sum
 and count for the proper hour. In this case, the timestamp would be truncated
 to the hour in which the sample happened. 
-
-Using an aggregation, we can compute the load_average from the sum and the 
-count stored in each hour. 
 
 *Document per day* 
 
@@ -76,9 +73,6 @@ of "hour average" sub-documents within a larger document.
 
 When samples arrive, we insert them into the proper hour of the day document.
 
-When a query arrives, we just fetch the days over the time range specified,
-and use an aggregation to compute the averages. 
-
 Exercises 
 ---------
 
@@ -90,6 +84,7 @@ Exercises
   - what index would you use for this 
   - what shard key would you use for this 
   -- what could you use as a right-balanced shard key? 
+  - how could you use the aggregation framework to roll up results? 
 
 2. Given a budget of $650 / month, design a server to run this workload 
   (launch and configure your instance in 10gen's aws-test account) 
