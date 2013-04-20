@@ -11,16 +11,17 @@ serverCount=$1
 dayCount=$2
 impl=$3
 concurrency=$4
-time=$5
+testtime=$5
 host=$6
 
 echo "Launching ${concurrency} readers..."
 for i in `seq 1 ${concurrency}`; do 
-    mongo --host $host --eval "var serverCount=${serverCount}; var dayCount=${dayCount}; var impl='${impl} var';" lib/reader.js & 
+    mongo --host $host --eval "var serverCount=${serverCount}; var dayCount=${dayCount}; var impl='${impl}';" lib/reader.js & 
     echo "Started ${i}"
 done
 
-sleep ${time}
+sleep ${testtime}
+
 echo "Killing readers"
 ./bin/killallreaders
 

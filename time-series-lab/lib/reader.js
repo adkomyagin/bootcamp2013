@@ -11,7 +11,7 @@ var dpd = new DocumentPerDay();
 
 // we expect that the caller told us how many servers to simulate 
 
-print("Querying " + serverCount + " servers at " + now);
+print("Querying " + serverCount + " servers at " + new Date());
 
 // and how big a time period we should query data for 
 
