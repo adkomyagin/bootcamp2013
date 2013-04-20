@@ -106,3 +106,21 @@ Exercises
   - what query rate can you achieve for a 0-30 day time ranges? 
 
   
+Instructions
+============
+
+*Run the loader* 
+
+    ./bin/load <serverCount> <monthCount> <sample|hour|day> <hostname>
+
+for example: 
+
+    ./bin/load 10000 12 sample localhost:27107
+
+*Run the reader* 
+
+    ./bin/reader <serverCount> <dayCount> <sample|hour|day> <concurrency> <time> <hostname>
+
+for example: 
+
+    ./bin/reader 10000 30 sample 10 10 localhost:27017
