@@ -1,4 +1,4 @@
-var now = new Date(); 
+var end_of_time = new Date(2013,0,1); 
 // This is a driver program that loads data using the methods implemented 
 // in the student's "time-series.js" file. 
 
@@ -12,13 +12,13 @@ var dpd = new DocumentPerDay();
 
 // we expect that the caller told us how many server to simulate 
 
-print("Simulating " + serverCount + " servers at " + now);
+print("Simulating " + serverCount + " servers at " + new Date());
 
 // and how big a time period we should load data for 
 
 print("Generating " + monthCount + " months of samples");
-var end = new Date( now );
-end.setMonth(end.getMonth() + monthCount); 
+var begin = new Date( end_of_time );
+begin.setMonth(begin.getMonth() - monthCount); 
 
 // and which model to use 
 print("With the " + impl + " implementation");
@@ -28,10 +28,10 @@ if(impl=="hour") engine = dph;
 if(impl=="day") engine = dpd;
 // we sit in a loop, advancing time in 5 minute intervals
 
-for( var clock=now; clock<=end; clock.setMinutes( clock.getMinutes() + 5)) {
+for( var clock=begin; clock<=end_of_time; clock.setMinutes( clock.getMinutes() + 5)) {
     // during each 5 minute window, each server generates a sample 
     for( var server=0; server<serverCount; server++ ) { 
-        engine.store( server, Random.randInt(100), clock );
+        engine.store( 'server'+server, Random.randInt(100), clock );
     }
 }
 

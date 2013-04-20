@@ -8,22 +8,13 @@ function DocumentPerSample() {
 
     this.store = function( server_name, cpu_measurement, timestamp ) { 
         // implement the mongodb method to store a sample
-        print("store: " + server_name + " " + cpu_measurement + " " + timestamp );
     };
 
-    this.simple_query = function( server_name, days_ago ) {
+    this.query function( server_name, start, end ) {
         // return the set of documents for that server over the specified 
         // time range. don't worry about aggregating the data, just return 
         // all of the docs that you need for hte answer 
-        print("simple: " + server_name + " " + days_ago );
-    };
-     
-    this.aggregate_query = function( server_name, days_ago ) { 
-        // this time return data aggregated for the caller 
-        // return a document that looks like this: 
-        // { loads: [ 23, 32, 12, 52, 34, 12, 12 ] } 
-        // where there is 1 number for each hour starting from hour 0
-        print("agg: " + server_name + " " + days_ago );
+        // remember to actually drain the cursor! (hint: "itcount()")
     };
 
 }
@@ -39,19 +30,12 @@ function DocumentPerHour() {
         // implement the mongodb method to store a sample
     };
 
-    this.simple_query = function( server_name, days_ago ) {
+    this.query = function( server_name, days_ago ) {
         // return the set of documents for that server over the specified 
         // time range. don't worry about aggregating the data, just return 
         // all of the docs that you need for hte answer 
+        // remember to actually drain the cursor! (hint: "itcount()")
     };
-     
-    this.aggregate_query = function( server_name, days_ago ) { 
-        // this time return data aggregated for the caller 
-        // return a document that looks like this: 
-        // { loads: [ 23, 32, 12, 52, 34, 12, 12 ] } 
-        // where there is 1 number for each hour starting from hour 0
-    };
-
 }
 
 //-----------------------------------------------------------------------------
@@ -64,16 +48,10 @@ function DocumentPerDay() {
         // implement the mongodb method to store a sample
     };
 
-    this.simple_query = function( server_name, days_ago ) {
+    this.query = function( server_name, days_ago ) {
         // return the set of documents for that server over the specified 
         // time range. don't worry about aggregating the data, just return 
         // all of the docs that you need for hte answer 
-    };
-     
-    this.aggregate_query = function( server_name, days_ago ) { 
-        // this time return data aggregated for the caller 
-        // return a document that looks like this: 
-        // { loads: [ 23, 32, 12, 52, 34, 12, 12 ] } 
-        // where there is 1 number for each hour starting from hour 0
+        // remember to actually drain the cursor! (hint: "itcount()")
     };
 }

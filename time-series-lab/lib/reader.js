@@ -1,3 +1,4 @@
+var end_of_time = new Date(2013,0,1); 
 // This is a driver program that loads data using the methods implemented 
 // in the student's "time-series.js" file. 
 
@@ -16,6 +17,8 @@ print("Querying " + serverCount + " servers at " + new Date());
 // and how big a time period we should query data for 
 
 print("Loading the last " + dayCount + " days of samples");
+var begin_range = new Date( end_of_time );
+begin_range.setDate( begin_range.getDate() - dayCount );
 
 // and which model to use 
 print("With the " + impl + " implementation");
@@ -25,6 +28,6 @@ if(impl=="hour") engine = dph;
 if(impl=="day") engine = dpd;
 
 for(;;) { 
-    var server = "server" + Random.randInt(serverCount);
-    engine.aggregate_query( server, dayCount );  
+    var name = "server" + Random.randInt(serverCount);
+    engine.simple_query( name, begin_range, end_of_time );  
 }
