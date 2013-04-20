@@ -1,7 +1,9 @@
 Time Series Lab
 ===============
 
-Your job is to implement 3 different models for storing time-series data, design a mongodb server configuration to handle these workloads, and then evaluate the performance of your workloads on that server. 
+Your job is to implement 3 different models for storing time-series data, 
+design a mongodb server configuration to handle these workloads, and then 
+evaluate the performance of your workloads on that server. 
 
 The Scenario 
 ------------
