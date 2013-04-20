@@ -19,12 +19,12 @@ confidence that it can support the full load of the application.
 Use Cases 
 ---------
 
-*Storing a sample S from server X at time T* 
+### Storing a sample S from server X at time T 
 
 Your application needs to take a server-name, cpu-load measurement, and 
 a timestamp, and store it in MongoDB. 
 
-*Find the hourly average cpu for server X over the last D days* 
+### Find the hourly average cpu for server X over the last D days 
 
 Your application needs to accept a query for a server-name, and a time range, 
 and then return the hourly average cpu load for that machine. 
@@ -32,17 +32,17 @@ and then return the hourly average cpu load for that machine.
 Implementation Choices
 ----------------------
 
-*Document per sample* 
+### Document per sample 
 
 This is the "relational database" way of modeling the application. As samples 
 arrive, you store each one as a document in the database.  
 
-   { load: 92, server: 'server1', timestamp: ISODate("...") } 
+    { load: 92, server: 'server1', timestamp: ISODate("...") } 
 
 As samples arrive, you just insert them into the database. When a query arrives
 we'll fetch all of the documents in that time range and return them. 
 
-*Document per hour* 
+### Document per hour 
 
 Another option is to store 1 document for each hour and to pre-aggregate 
 new samples into that document. Here you'd keep a sum and an average and 
@@ -54,7 +54,7 @@ When samples arrive, you do an update on this document to increment the sum
 and count for the proper hour. In this case, the timestamp would be truncated
 to the hour in which the sample happened. 
 
-*Document per day* 
+### Document per day 
 
 We could group all of the load averages for a single day into a single document.
 This is a lot like the document per hour scenario, except we store an array
