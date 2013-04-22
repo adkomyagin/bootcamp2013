@@ -27,7 +27,9 @@ if(impl=="sample") engine = dps;
 if(impl=="hour") engine = dph;
 if(impl=="day") engine = dpd;
 
+engine.preload()
+
 for(;;) { 
     var name = "server" + Random.randInt(serverCount);
-    engine.simple_query( name, begin_range, end_of_time );  
+    engine.query( name, begin_range, end_of_time );  
 }

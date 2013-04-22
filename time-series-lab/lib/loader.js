@@ -1,7 +1,6 @@
 var end_of_time = new Date(2013,0,1); 
 // This is a driver program that loads data using the methods implemented 
 // in the student's "time-series.js" file. 
-
 load("time-series.js");
 
 // we expect that file to define Classes for each implementation 
@@ -27,6 +26,9 @@ if(impl=="sample") engine = dps;
 if(impl=="hour") engine = dph;
 if(impl=="day") engine = dpd;
 // we sit in a loop, advancing time in 5 minute intervals
+
+engine.preload()
+engine.init()
 
 for( var clock=begin; clock<=end_of_time; clock.setMinutes( clock.getMinutes() + 5)) {
     // during each 5 minute window, each server generates a sample 
