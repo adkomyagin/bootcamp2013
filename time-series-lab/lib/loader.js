@@ -30,7 +30,7 @@ if(impl=="day") engine = dpd;
 engine.preload()
 engine.init()
 
-for( var clock=begin; clock<=end_of_time; clock.setMinutes( clock.getMinutes() + 5)) {
+for( var clock=begin; clock<=end_of_time; clock.setUTCMinutes( clock.getUTCMinutes() + 5)) {
     // during each 5 minute window, each server generates a sample 
     for( var server=0; server<serverCount; server++ ) { 
         engine.store( 'server'+server, Random.randInt(100), clock );
