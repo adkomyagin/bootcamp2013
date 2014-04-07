@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export AWS_ACCESS_KEY=AKIAJROG3LMEIEHVUK7Q
-export AWS_SECRET_KEY=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
+export AWS_ACCESS_KEY=AAA
+export AWS_SECRET_KEY=AAA
 
 echo "[10gen]
 name=10gen Repository
